@@ -5,11 +5,15 @@ using SmartWorkout.Components.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
+var connectionString = builder.Configuration.GetConnectionString("Default")
+    ?? throw new NullReferenceException("No connection string in config!");
+
 // Add services to the container.
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 builder.Services.AddMudServices();
-builder.Services.AddDbContextFactory<DataContext>((DbContextOptionsBuilder options) => options.UseSqlServer();
+builder.Services.AddDbContextFactory<DataContext>((DbContextOptionsBuilder options) =>
+    options.UseSqlServer(connectionString));
 
 
 

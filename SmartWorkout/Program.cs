@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using MudBlazor.Services;
 using SmartWorkout.Components;
 using SmartWorkout.Components.Data;
+using SmartWorkout.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +13,7 @@ var connectionString = builder.Configuration.GetConnectionString("Default")
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 builder.Services.AddMudServices();
+builder.Services.AddTransient<WorkoutService>();
 builder.Services.AddDbContextFactory<DataContext>((DbContextOptionsBuilder options) =>
     options.UseSqlServer(connectionString));
 

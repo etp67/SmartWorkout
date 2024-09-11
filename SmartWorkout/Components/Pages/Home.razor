@@ -1,7 +1,17 @@
 ﻿@page "/"
+@using SmartWorkout.Services
+@inject WorkoutService workoutService
 
 <PageTitle>Home</PageTitle>
 
 <h1>Smart Workout</h1>
 
 Track your workouts and progress with this simple app. Get started below.
+
+<EditForm Model="@workout" OnValidSubmit="HandleSubmit">
+    <label for="NameInput">Name</label>
+    <InputText id="NameInput" @bind-Value="workout.Name"/>
+    <label for="DescriptionInput">Description</label>
+    <InputText id="DescriptionInput" @bind-Value="workout.Description" />
+    <button type="submit" class="btn-primary">Create</button>
+</EditForm>
